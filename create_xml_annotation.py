@@ -13,7 +13,7 @@ def create_xml_bndbox(xml_object, xmin, ymin, xmax, ymax):
     ET.SubElement(xml_bndbox, "ymax").text = ymax
 
 
-def create_xml_annotation(file_name_list: list, input_dir):
+def create_xml_annotation(file_name_list: list, input_dir, output_dir):
 
     for file_name in file_name_list:
 
@@ -58,7 +58,7 @@ def create_xml_annotation(file_name_list: list, input_dir):
 
         xml_file_name = input_dir + file_name[:-4] + ".xml"
 
-        tree.write(xml_file_name)
+        tree.write(output_dir)
 
         xml_file = xml.dom.minidom.parse(xml_file_name)
         pretty_xml_as_string = xml_file.toprettyxml()
@@ -73,9 +73,11 @@ def create_file_name_list(input_dir):
 
 
 if __name__ == '__main__':
-    input_dir = "/media/max/DATA/dev/data/test/"
+    input_dir = "/media/max/DATA/dev/data/test/images/"
+
+    output_dir = "/media/max/DATA/dev/data/test/annotations/"
 
     file_name_list = create_file_name_list(input_dir)
 
-    create_xml_annotation(file_name_list, input_dir)
+    create_xml_annotation(file_name_list, input_dir, output_dir)
 
