@@ -1,0 +1,137 @@
+/* used Version 2.6.1 of protobuf */
+
+syntax = "proto2";
+
+package imageLabelData;
+/* Defines a labeled image. "Mainmessage" */
+message ImageLabelData {
+
+/*Definition of some datastructures */
+    /* Defines a rect containing two points */
+    message BoundingBox {
+      required Point upperLeft = 1;
+      required Point lowerRight = 2;
+    }
+
+    /* Defines a Point on the picture */
+    message Point {
+        required int32 x = 1;
+        required int32 y = 2;
+    }
+
+    /* Defines a specific date containing a day, month and year */
+    message Date{
+        required int32 day = 1;
+        required int32 month = 2;
+        required int32 year = 3;
+    }
+
+    /* Defines a Label. Each labeled object on the image should have 'Label' as member */
+    message Label {
+        required BoundingBox boundingBox = 1;
+        optional Date date = 2;
+        optional int32 verificationcount = 3;
+        optional string person = 4;
+    } 
+
+    /* Defines a 3x3 matrix of floats */
+    message Matrix3f {
+        required float m00 = 1;
+        required float m01 = 2;
+        required float m02 = 3;
+        required float m10 = 4;
+        required float m11 = 5;
+        required float m12 = 6;
+        required float m20 = 7;
+        required float m21 = 8;
+        required float m22 = 9;
+    }
+
+    /* Defines a three dimensional vector of floats */
+    message Vector3f {
+        required float x = 1;
+        required float y = 2;
+        required float z = 3;
+    }
+
+    /* Defines a two dimensional vector of floats */
+    message Vector2f {
+        required float x = 1;
+        required float y = 2;
+    }
+
+    /* contains a color as RGB */
+    message Color {
+        required int32 r = 1;
+        required int32 g = 2;
+        required int32 b = 3;
+    }
+
+    /* Defines a labeled robot */
+    message Robot {
+      required Label label = 1;
+      optional int32 orientation = 2;
+      optional bool fallen = 3;
+
+      optional Color teamcolor = 4;
+    }
+
+    /* Defines some camera information such as resolution */
+    message CameraInformation {
+        required Resolution resolution = 1;
+        optional int32 cameraIndex = 2; /* Nao: lower camera = 1, upper camera = 0 */
+        optional Matrix3f rotation = 3;
+        optional Vector3f translation = 4;
+        optional CameraIntrinsics cameraIntrinsics = 5;
+
+        message Resolution{
+            required int32 height = 1;
+            required int32 width = 2;
+        }
+
+        message CameraIntrinsics{
+            required float openingAngleWidth = 1;
+            required float openingAngleHeight = 2;
+            required Vector2f opticalCenter = 3;
+        }
+    }
+
+    /* Defines a labeled ball */
+    message Ball{
+        required Label label = 1;
+        optional bool moving = 2;
+    }
+
+    /* Defines a labeled goal */
+    message Goal {
+        optional Label leftPost = 1;
+        optional Label rightPost = 2;
+    }
+
+    /* Defines a labeled line crossing */
+    message LineCrossing {
+        required Label label = 1;
+    }
+
+    /* Defines a labeled centercircle */
+    message Centercircle {
+        required Label label = 1;
+    }
+
+/* Datarepresentation of  */
+
+  repeated Robot robots = 1;
+  repeated Ball balls = 2;
+  repeated Goal goals = 3;
+  repeated Label penaltyCross = 4;
+  repeated LineCrossing lineCrossing = 11;
+  repeated Centercircle centerCircle = 12;
+
+  optional CameraInformation cameraInformation = 5;
+  
+  optional int32 timestamp = 6;
+  optional Date captureDate = 7;
+  optional string captureLocation = 8;
+  optional string datasetName = 9;
+  optional string team = 10;
+}
