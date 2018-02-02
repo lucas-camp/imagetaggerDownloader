@@ -38,8 +38,8 @@ def create_xml_annotation(file_name_list: list, input_dir, output_dir):
 
             xmin = str(robot.label.boundingBox.upperLeft.x)
             ymin = str(robot.label.boundingBox.upperLeft.y)
-            xmax = str(robot.label.boundingBox.upperLeft.x)
-            ymax = str(robot.label.boundingBox.upperLeft.y)
+            xmax = str(robot.label.boundingBox.lowerRight.x)
+            ymax = str(robot.label.boundingBox.lowerRight.y)
             create_xml_bndbox(xml_object, xmin, ymin, xmax, ymax)
 
         # read all balls
@@ -50,8 +50,8 @@ def create_xml_annotation(file_name_list: list, input_dir, output_dir):
 
             xmin = str(ball.label.boundingBox.upperLeft.x)
             ymin = str(ball.label.boundingBox.upperLeft.y)
-            xmax = str(ball.label.boundingBox.upperLeft.x)
-            ymax = str(ball.label.boundingBox.upperLeft.y)
+            xmax = str(ball.label.boundingBox.lowerRight.x)
+            ymax = str(ball.label.boundingBox.lowerRight.y)
             create_xml_bndbox(xml_object, xmin, ymin, xmax, ymax)
 
         tree = ET.ElementTree(xml_root)
@@ -62,6 +62,7 @@ def create_xml_annotation(file_name_list: list, input_dir, output_dir):
 
         xml_file = xml.dom.minidom.parse(xml_file_name)
         pretty_xml_as_string = xml_file.toprettyxml()
+
 
 def create_file_name_list(input_dir):
     file_name_list = []
