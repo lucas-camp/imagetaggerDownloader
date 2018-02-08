@@ -28,12 +28,12 @@ def save_annotations_to_xml(file_path, file_name):
     for robot in label_data.robots:
         xmin = str(robot.label.boundingBox.upperLeft.x)
         ymin = str(robot.label.boundingBox.upperLeft.y)
-        xmax = str(robot.label.boundingBox.upperLeft.x)
-        ymax = str(robot.label.boundingBox.upperLeft.y)
+        xmax = str(robot.label.boundingBox.lowerRight.x)
+        ymax = str(robot.label.boundingBox.lowerRight.y)
         if robot.label.boundingBox.upperLeft.x >= 0 and \
                         robot.label.boundingBox.upperLeft.y >= 0 and \
-                        robot.label.boundingBox.upperLeft.x >= 0 and \
-                        robot.label.boundingBox.upperLeft.y >= 0:
+                        robot.label.boundingBox.lowerRight.x >= 0 and \
+                        robot.label.boundingBox.lowerRight.y >= 0:
             isRobotInImage = True
             xml_object = ET.SubElement(xml_root, "object")
             ET.SubElement(xml_object, "name").text = "robot"
@@ -45,12 +45,12 @@ def save_annotations_to_xml(file_path, file_name):
     for ball in label_data.balls:
         xmin = str(ball.label.boundingBox.upperLeft.x)
         ymin = str(ball.label.boundingBox.upperLeft.y)
-        xmax = str(ball.label.boundingBox.upperLeft.x)
-        ymax = str(ball.label.boundingBox.upperLeft.y)
+        xmax = str(ball.label.boundingBox.lowerRight.x)
+        ymax = str(ball.label.boundingBox.lowerRight.y)
         if ball.label.boundingBox.upperLeft.x >= 0 and \
                         ball.label.boundingBox.upperLeft.y >= 0 and \
-                        ball.label.boundingBox.upperLeft.x >= 0 and \
-                        ball.label.boundingBox.upperLeft.y >= 0:
+                        ball.label.boundingBox.lowerRight.x >= 0 and \
+                        ball.label.boundingBox.lowerRight.y >= 0:
             isBallInImage = True
             xml_object = ET.SubElement(xml_root, "object")
             ET.SubElement(xml_object, "name").text = "ball"
