@@ -1,6 +1,5 @@
 import json
 import requests
-import shutil
 
 from io import BytesIO
 
@@ -75,15 +74,11 @@ class RequestHandler:
 
         return annotations
 
-    def download_image(self, image_link, file_path, in_memory):
+    def download_image(self, image_link):
         response = self._session.get(image_link, stream=True)
         response.raw.decode_content = True
-        if not in_memory:
-            with open(file_path, 'wb') as f:
-                shutil.copyfileobj(response.raw, f)
-                return
-        else:
-            return BytesIO(response.raw.data)
+
+        return BytesIO(response.raw.data)
 
 
 class ImageSetNotFoundError(Exception):
