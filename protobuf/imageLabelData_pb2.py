@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='imageLabelData.proto',
   package='imageLabelData',
   syntax='proto2',
-  serialized_pb=_b('\n\x14imageLabelData.proto\x12\x0eimageLabelData\"\xb5\x11\n\x0eImageLabelData\x12\x34\n\x06robots\x18\x01 \x03(\x0b\x32$.imageLabelData.ImageLabelData.Robot\x12\x32\n\x05\x62\x61lls\x18\x02 \x03(\x0b\x32#.imageLabelData.ImageLabelData.Ball\x12\x32\n\x05goals\x18\x03 \x03(\x0b\x32#.imageLabelData.ImageLabelData.Goal\x12:\n\x0cpenaltyCross\x18\x04 \x03(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x41\n\x0clineCrossing\x18\x0b \x03(\x0b\x32+.imageLabelData.ImageLabelData.LineCrossing\x12\x41\n\x0c\x63\x65nterCircle\x18\x0c \x03(\x0b\x32+.imageLabelData.ImageLabelData.Centercircle\x12K\n\x11\x63\x61meraInformation\x18\x05 \x01(\x0b\x32\x30.imageLabelData.ImageLabelData.CameraInformation\x12\x11\n\ttimestamp\x18\x06 \x01(\x05\x12\x38\n\x0b\x63\x61ptureDate\x18\x07 \x01(\x0b\x32#.imageLabelData.ImageLabelData.Date\x12\x17\n\x0f\x63\x61ptureLocation\x18\x08 \x01(\t\x12\x13\n\x0b\x64\x61tasetName\x18\t \x01(\t\x12\x0c\n\x04team\x18\n \x01(\t\x1a\x80\x01\n\x0b\x42oundingBox\x12\x37\n\tupperLeft\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Point\x12\x38\n\nlowerRight\x18\x02 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Point\x1a\x1d\n\x05Point\x12\t\n\x01x\x18\x01 \x02(\x05\x12\t\n\x01y\x18\x02 \x02(\x05\x1a\x30\n\x04\x44\x61te\x12\x0b\n\x03\x64\x61y\x18\x01 \x02(\x05\x12\r\n\x05month\x18\x02 \x02(\x05\x12\x0c\n\x04year\x18\x03 \x02(\x05\x1a\xa6\x01\n\x05Label\x12?\n\x0b\x62oundingBox\x18\x01 \x02(\x0b\x32*.imageLabelData.ImageLabelData.BoundingBox\x12\x31\n\x04\x64\x61te\x18\x02 \x01(\x0b\x32#.imageLabelData.ImageLabelData.Date\x12\x19\n\x11verificationcount\x18\x03 \x01(\x05\x12\x0e\n\x06person\x18\x04 \x01(\t\x1a\x7f\n\x08Matrix3f\x12\x0b\n\x03m00\x18\x01 \x02(\x02\x12\x0b\n\x03m01\x18\x02 \x02(\x02\x12\x0b\n\x03m02\x18\x03 \x02(\x02\x12\x0b\n\x03m10\x18\x04 \x02(\x02\x12\x0b\n\x03m11\x18\x05 \x02(\x02\x12\x0b\n\x03m12\x18\x06 \x02(\x02\x12\x0b\n\x03m20\x18\x07 \x02(\x02\x12\x0b\n\x03m21\x18\x08 \x02(\x02\x12\x0b\n\x03m22\x18\t \x02(\x02\x1a+\n\x08Vector3f\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x12\t\n\x01z\x18\x03 \x02(\x02\x1a \n\x08Vector2f\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x1a(\n\x05\x43olor\x12\t\n\x01r\x18\x01 \x02(\x05\x12\t\n\x01g\x18\x02 \x02(\x05\x12\t\n\x01\x62\x18\x03 \x02(\x05\x1a\x9a\x01\n\x05Robot\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x13\n\x0borientation\x18\x02 \x01(\x05\x12\x0e\n\x06\x66\x61llen\x18\x03 \x01(\x08\x12\x37\n\tteamcolor\x18\x04 \x01(\x0b\x32$.imageLabelData.ImageLabelData.Color\x1a\x88\x04\n\x11\x43\x61meraInformation\x12O\n\nresolution\x18\x01 \x02(\x0b\x32;.imageLabelData.ImageLabelData.CameraInformation.Resolution\x12\x13\n\x0b\x63\x61meraIndex\x18\x02 \x01(\x05\x12\x39\n\x08rotation\x18\x03 \x01(\x0b\x32\'.imageLabelData.ImageLabelData.Matrix3f\x12<\n\x0btranslation\x18\x04 \x01(\x0b\x32\'.imageLabelData.ImageLabelData.Vector3f\x12[\n\x10\x63\x61meraIntrinsics\x18\x05 \x01(\x0b\x32\x41.imageLabelData.ImageLabelData.CameraInformation.CameraIntrinsics\x1a+\n\nResolution\x12\x0e\n\x06height\x18\x01 \x02(\x05\x12\r\n\x05width\x18\x02 \x02(\x05\x1a\x89\x01\n\x10\x43\x61meraIntrinsics\x12\x19\n\x11openingAngleWidth\x18\x01 \x02(\x02\x12\x1a\n\x12openingAngleHeight\x18\x02 \x02(\x02\x12>\n\ropticalCenter\x18\x03 \x02(\x0b\x32\'.imageLabelData.ImageLabelData.Vector2f\x1aK\n\x04\x42\x61ll\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x0e\n\x06moving\x18\x02 \x01(\x08\x1aw\n\x04Goal\x12\x36\n\x08leftPost\x18\x01 \x01(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x37\n\trightPost\x18\x02 \x01(\x0b\x32$.imageLabelData.ImageLabelData.Label\x1a\x43\n\x0cLineCrossing\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x1a\x43\n\x0c\x43\x65ntercircle\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label')
+  serialized_pb=_b('\n\x14imageLabelData.proto\x12\x0eimageLabelData\"\xe7\x12\n\x0eImageLabelData\x12\x34\n\x06robots\x18\x01 \x03(\x0b\x32$.imageLabelData.ImageLabelData.Robot\x12\x32\n\x05\x62\x61lls\x18\x02 \x03(\x0b\x32#.imageLabelData.ImageLabelData.Ball\x12\x32\n\x05goals\x18\x03 \x03(\x0b\x32#.imageLabelData.ImageLabelData.Goal\x12:\n\x0cpenaltyCross\x18\x04 \x03(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x41\n\x0clineCrossing\x18\x0b \x03(\x0b\x32+.imageLabelData.ImageLabelData.LineCrossing\x12\x41\n\x0c\x63\x65nterCircle\x18\x0c \x03(\x0b\x32+.imageLabelData.ImageLabelData.Centercircle\x12K\n\x11\x63\x61meraInformation\x18\x05 \x01(\x0b\x32\x30.imageLabelData.ImageLabelData.CameraInformation\x12\x43\n\nimageInfos\x18\r \x01(\x0b\x32/.imageLabelData.ImageLabelData.ImageInformation\x12\x11\n\ttimestamp\x18\x06 \x01(\x05\x12\x38\n\x0b\x63\x61ptureDate\x18\x07 \x01(\x0b\x32#.imageLabelData.ImageLabelData.Date\x12\x17\n\x0f\x63\x61ptureLocation\x18\x08 \x01(\t\x12\x13\n\x0b\x64\x61tasetName\x18\t \x01(\t\x12\x0c\n\x04team\x18\n \x01(\t\x12\x14\n\x0cplayerNumber\x18\x0e \x01(\x05\x1a\x80\x01\n\x0b\x42oundingBox\x12\x37\n\tupperLeft\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Point\x12\x38\n\nlowerRight\x18\x02 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Point\x1a\x1d\n\x05Point\x12\t\n\x01x\x18\x01 \x02(\x05\x12\t\n\x01y\x18\x02 \x02(\x05\x1a\x30\n\x04\x44\x61te\x12\x0b\n\x03\x64\x61y\x18\x01 \x02(\x05\x12\r\n\x05month\x18\x02 \x02(\x05\x12\x0c\n\x04year\x18\x03 \x02(\x05\x1a\xa6\x01\n\x05Label\x12?\n\x0b\x62oundingBox\x18\x01 \x02(\x0b\x32*.imageLabelData.ImageLabelData.BoundingBox\x12\x31\n\x04\x64\x61te\x18\x02 \x01(\x0b\x32#.imageLabelData.ImageLabelData.Date\x12\x19\n\x11verificationcount\x18\x03 \x01(\x05\x12\x0e\n\x06person\x18\x04 \x01(\t\x1a\x7f\n\x08Matrix3f\x12\x0b\n\x03m00\x18\x01 \x02(\x02\x12\x0b\n\x03m01\x18\x02 \x02(\x02\x12\x0b\n\x03m02\x18\x03 \x02(\x02\x12\x0b\n\x03m10\x18\x04 \x02(\x02\x12\x0b\n\x03m11\x18\x05 \x02(\x02\x12\x0b\n\x03m12\x18\x06 \x02(\x02\x12\x0b\n\x03m20\x18\x07 \x02(\x02\x12\x0b\n\x03m21\x18\x08 \x02(\x02\x12\x0b\n\x03m22\x18\t \x02(\x02\x1a+\n\x08Vector3f\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x12\t\n\x01z\x18\x03 \x02(\x02\x1a \n\x08Vector2f\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x1a(\n\x05\x43olor\x12\t\n\x01r\x18\x01 \x02(\x05\x12\t\n\x01g\x18\x02 \x02(\x05\x12\t\n\x01\x62\x18\x03 \x02(\x05\x1a\x9a\x01\n\x05Robot\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x13\n\x0borientation\x18\x02 \x01(\x05\x12\x0e\n\x06\x66\x61llen\x18\x03 \x01(\x08\x12\x37\n\tteamcolor\x18\x04 \x01(\x0b\x32$.imageLabelData.ImageLabelData.Color\x1a\x88\x04\n\x11\x43\x61meraInformation\x12O\n\nresolution\x18\x01 \x02(\x0b\x32;.imageLabelData.ImageLabelData.CameraInformation.Resolution\x12\x13\n\x0b\x63\x61meraIndex\x18\x02 \x01(\x05\x12\x39\n\x08rotation\x18\x03 \x01(\x0b\x32\'.imageLabelData.ImageLabelData.Matrix3f\x12<\n\x0btranslation\x18\x04 \x01(\x0b\x32\'.imageLabelData.ImageLabelData.Vector3f\x12[\n\x10\x63\x61meraIntrinsics\x18\x05 \x01(\x0b\x32\x41.imageLabelData.ImageLabelData.CameraInformation.CameraIntrinsics\x1a+\n\nResolution\x12\x0e\n\x06height\x18\x01 \x02(\x05\x12\r\n\x05width\x18\x02 \x02(\x05\x1a\x89\x01\n\x10\x43\x61meraIntrinsics\x12\x19\n\x11openingAngleWidth\x18\x01 \x02(\x02\x12\x1a\n\x12openingAngleHeight\x18\x02 \x02(\x02\x12>\n\ropticalCenter\x18\x03 \x02(\x0b\x32\'.imageLabelData.ImageLabelData.Vector2f\x1aK\n\x04\x42\x61ll\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x0e\n\x06moving\x18\x02 \x01(\x08\x1aw\n\x04Goal\x12\x36\n\x08leftPost\x18\x01 \x01(\x0b\x32$.imageLabelData.ImageLabelData.Label\x12\x37\n\trightPost\x18\x02 \x01(\x0b\x32$.imageLabelData.ImageLabelData.Label\x1a\x43\n\x0cLineCrossing\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x1a\x43\n\x0c\x43\x65ntercircle\x12\x33\n\x05label\x18\x01 \x02(\x0b\x32$.imageLabelData.ImageLabelData.Label\x1aU\n\x10ImageInformation\x12\x14\n\x0cimagechannel\x18\x01 \x01(\x05\x12\x10\n\x08\x62lurness\x18\x02 \x01(\x02\x12\x19\n\x11\x61verage_brightnes\x18\x03 \x01(\x05')
 )
 
 
@@ -58,8 +58,8 @@ _IMAGELABELDATA_BOUNDINGBOX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=626,
-  serialized_end=754,
+  serialized_start=717,
+  serialized_end=845,
 )
 
 _IMAGELABELDATA_POINT = _descriptor.Descriptor(
@@ -95,8 +95,8 @@ _IMAGELABELDATA_POINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=756,
-  serialized_end=785,
+  serialized_start=847,
+  serialized_end=876,
 )
 
 _IMAGELABELDATA_DATE = _descriptor.Descriptor(
@@ -139,8 +139,8 @@ _IMAGELABELDATA_DATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=787,
-  serialized_end=835,
+  serialized_start=878,
+  serialized_end=926,
 )
 
 _IMAGELABELDATA_LABEL = _descriptor.Descriptor(
@@ -190,8 +190,8 @@ _IMAGELABELDATA_LABEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=838,
-  serialized_end=1004,
+  serialized_start=929,
+  serialized_end=1095,
 )
 
 _IMAGELABELDATA_MATRIX3F = _descriptor.Descriptor(
@@ -276,8 +276,8 @@ _IMAGELABELDATA_MATRIX3F = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1006,
-  serialized_end=1133,
+  serialized_start=1097,
+  serialized_end=1224,
 )
 
 _IMAGELABELDATA_VECTOR3F = _descriptor.Descriptor(
@@ -320,8 +320,8 @@ _IMAGELABELDATA_VECTOR3F = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1135,
-  serialized_end=1178,
+  serialized_start=1226,
+  serialized_end=1269,
 )
 
 _IMAGELABELDATA_VECTOR2F = _descriptor.Descriptor(
@@ -357,8 +357,8 @@ _IMAGELABELDATA_VECTOR2F = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1180,
-  serialized_end=1212,
+  serialized_start=1271,
+  serialized_end=1303,
 )
 
 _IMAGELABELDATA_COLOR = _descriptor.Descriptor(
@@ -401,8 +401,8 @@ _IMAGELABELDATA_COLOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1214,
-  serialized_end=1254,
+  serialized_start=1305,
+  serialized_end=1345,
 )
 
 _IMAGELABELDATA_ROBOT = _descriptor.Descriptor(
@@ -452,8 +452,8 @@ _IMAGELABELDATA_ROBOT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1257,
-  serialized_end=1411,
+  serialized_start=1348,
+  serialized_end=1502,
 )
 
 _IMAGELABELDATA_CAMERAINFORMATION_RESOLUTION = _descriptor.Descriptor(
@@ -489,8 +489,8 @@ _IMAGELABELDATA_CAMERAINFORMATION_RESOLUTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1751,
-  serialized_end=1794,
+  serialized_start=1842,
+  serialized_end=1885,
 )
 
 _IMAGELABELDATA_CAMERAINFORMATION_CAMERAINTRINSICS = _descriptor.Descriptor(
@@ -533,8 +533,8 @@ _IMAGELABELDATA_CAMERAINFORMATION_CAMERAINTRINSICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1797,
-  serialized_end=1934,
+  serialized_start=1888,
+  serialized_end=2025,
 )
 
 _IMAGELABELDATA_CAMERAINFORMATION = _descriptor.Descriptor(
@@ -591,8 +591,8 @@ _IMAGELABELDATA_CAMERAINFORMATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1414,
-  serialized_end=1934,
+  serialized_start=1505,
+  serialized_end=2025,
 )
 
 _IMAGELABELDATA_BALL = _descriptor.Descriptor(
@@ -628,8 +628,8 @@ _IMAGELABELDATA_BALL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1936,
-  serialized_end=2011,
+  serialized_start=2027,
+  serialized_end=2102,
 )
 
 _IMAGELABELDATA_GOAL = _descriptor.Descriptor(
@@ -665,8 +665,8 @@ _IMAGELABELDATA_GOAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2013,
-  serialized_end=2132,
+  serialized_start=2104,
+  serialized_end=2223,
 )
 
 _IMAGELABELDATA_LINECROSSING = _descriptor.Descriptor(
@@ -695,8 +695,8 @@ _IMAGELABELDATA_LINECROSSING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2134,
-  serialized_end=2201,
+  serialized_start=2225,
+  serialized_end=2292,
 )
 
 _IMAGELABELDATA_CENTERCIRCLE = _descriptor.Descriptor(
@@ -725,8 +725,52 @@ _IMAGELABELDATA_CENTERCIRCLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2203,
-  serialized_end=2270,
+  serialized_start=2294,
+  serialized_end=2361,
+)
+
+_IMAGELABELDATA_IMAGEINFORMATION = _descriptor.Descriptor(
+  name='ImageInformation',
+  full_name='imageLabelData.ImageLabelData.ImageInformation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='imagechannel', full_name='imageLabelData.ImageLabelData.ImageInformation.imagechannel', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='blurness', full_name='imageLabelData.ImageLabelData.ImageInformation.blurness', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='average_brightnes', full_name='imageLabelData.ImageLabelData.ImageInformation.average_brightnes', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2363,
+  serialized_end=2448,
 )
 
 _IMAGELABELDATA = _descriptor.Descriptor(
@@ -786,44 +830,58 @@ _IMAGELABELDATA = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='imageLabelData.ImageLabelData.timestamp', index=7,
+      name='imageInfos', full_name='imageLabelData.ImageLabelData.imageInfos', index=7,
+      number=13, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='imageLabelData.ImageLabelData.timestamp', index=8,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='captureDate', full_name='imageLabelData.ImageLabelData.captureDate', index=8,
+      name='captureDate', full_name='imageLabelData.ImageLabelData.captureDate', index=9,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='captureLocation', full_name='imageLabelData.ImageLabelData.captureLocation', index=9,
+      name='captureLocation', full_name='imageLabelData.ImageLabelData.captureLocation', index=10,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='datasetName', full_name='imageLabelData.ImageLabelData.datasetName', index=10,
+      name='datasetName', full_name='imageLabelData.ImageLabelData.datasetName', index=11,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='team', full_name='imageLabelData.ImageLabelData.team', index=11,
+      name='team', full_name='imageLabelData.ImageLabelData.team', index=12,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='playerNumber', full_name='imageLabelData.ImageLabelData.playerNumber', index=13,
+      number=14, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_IMAGELABELDATA_BOUNDINGBOX, _IMAGELABELDATA_POINT, _IMAGELABELDATA_DATE, _IMAGELABELDATA_LABEL, _IMAGELABELDATA_MATRIX3F, _IMAGELABELDATA_VECTOR3F, _IMAGELABELDATA_VECTOR2F, _IMAGELABELDATA_COLOR, _IMAGELABELDATA_ROBOT, _IMAGELABELDATA_CAMERAINFORMATION, _IMAGELABELDATA_BALL, _IMAGELABELDATA_GOAL, _IMAGELABELDATA_LINECROSSING, _IMAGELABELDATA_CENTERCIRCLE, ],
+  nested_types=[_IMAGELABELDATA_BOUNDINGBOX, _IMAGELABELDATA_POINT, _IMAGELABELDATA_DATE, _IMAGELABELDATA_LABEL, _IMAGELABELDATA_MATRIX3F, _IMAGELABELDATA_VECTOR3F, _IMAGELABELDATA_VECTOR2F, _IMAGELABELDATA_COLOR, _IMAGELABELDATA_ROBOT, _IMAGELABELDATA_CAMERAINFORMATION, _IMAGELABELDATA_BALL, _IMAGELABELDATA_GOAL, _IMAGELABELDATA_LINECROSSING, _IMAGELABELDATA_CENTERCIRCLE, _IMAGELABELDATA_IMAGEINFORMATION, ],
   enum_types=[
   ],
   options=None,
@@ -833,7 +891,7 @@ _IMAGELABELDATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=41,
-  serialized_end=2270,
+  serialized_end=2448,
 )
 
 _IMAGELABELDATA_BOUNDINGBOX.fields_by_name['upperLeft'].message_type = _IMAGELABELDATA_POINT
@@ -868,6 +926,7 @@ _IMAGELABELDATA_LINECROSSING.fields_by_name['label'].message_type = _IMAGELABELD
 _IMAGELABELDATA_LINECROSSING.containing_type = _IMAGELABELDATA
 _IMAGELABELDATA_CENTERCIRCLE.fields_by_name['label'].message_type = _IMAGELABELDATA_LABEL
 _IMAGELABELDATA_CENTERCIRCLE.containing_type = _IMAGELABELDATA
+_IMAGELABELDATA_IMAGEINFORMATION.containing_type = _IMAGELABELDATA
 _IMAGELABELDATA.fields_by_name['robots'].message_type = _IMAGELABELDATA_ROBOT
 _IMAGELABELDATA.fields_by_name['balls'].message_type = _IMAGELABELDATA_BALL
 _IMAGELABELDATA.fields_by_name['goals'].message_type = _IMAGELABELDATA_GOAL
@@ -875,6 +934,7 @@ _IMAGELABELDATA.fields_by_name['penaltyCross'].message_type = _IMAGELABELDATA_LA
 _IMAGELABELDATA.fields_by_name['lineCrossing'].message_type = _IMAGELABELDATA_LINECROSSING
 _IMAGELABELDATA.fields_by_name['centerCircle'].message_type = _IMAGELABELDATA_CENTERCIRCLE
 _IMAGELABELDATA.fields_by_name['cameraInformation'].message_type = _IMAGELABELDATA_CAMERAINFORMATION
+_IMAGELABELDATA.fields_by_name['imageInfos'].message_type = _IMAGELABELDATA_IMAGEINFORMATION
 _IMAGELABELDATA.fields_by_name['captureDate'].message_type = _IMAGELABELDATA_DATE
 DESCRIPTOR.message_types_by_name['ImageLabelData'] = _IMAGELABELDATA
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -992,6 +1052,13 @@ ImageLabelData = _reflection.GeneratedProtocolMessageType('ImageLabelData', (_me
     # @@protoc_insertion_point(class_scope:imageLabelData.ImageLabelData.Centercircle)
     ))
   ,
+
+  ImageInformation = _reflection.GeneratedProtocolMessageType('ImageInformation', (_message.Message,), dict(
+    DESCRIPTOR = _IMAGELABELDATA_IMAGEINFORMATION,
+    __module__ = 'imageLabelData_pb2'
+    # @@protoc_insertion_point(class_scope:imageLabelData.ImageLabelData.ImageInformation)
+    ))
+  ,
   DESCRIPTOR = _IMAGELABELDATA,
   __module__ = 'imageLabelData_pb2'
   # @@protoc_insertion_point(class_scope:imageLabelData.ImageLabelData)
@@ -1013,6 +1080,7 @@ _sym_db.RegisterMessage(ImageLabelData.Ball)
 _sym_db.RegisterMessage(ImageLabelData.Goal)
 _sym_db.RegisterMessage(ImageLabelData.LineCrossing)
 _sym_db.RegisterMessage(ImageLabelData.Centercircle)
+_sym_db.RegisterMessage(ImageLabelData.ImageInformation)
 
 
 # @@protoc_insertion_point(module_scope)

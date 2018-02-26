@@ -118,6 +118,13 @@ message ImageLabelData {
         required Label label = 1;
     }
 
+    /* Defines a set of general image informations */
+    message ImageInformation {
+        optional int32 imagechannel = 1;    /* Number of channels used while writing image as PNG */
+        optional float blurness = 2;        /*  Calculating variance of laplacian filter.
+                                                Heigher values mean sharper images. */
+        optional int32 average_brightnes = 3; /* sum of all brightnesses for each pixel devided by the sum of all pixels */
+    }
 /* Datarepresentation of  */
 
   repeated Robot robots = 1;
@@ -128,10 +135,12 @@ message ImageLabelData {
   repeated Centercircle centerCircle = 12;
 
   optional CameraInformation cameraInformation = 5;
-  
-  optional int32 timestamp = 6;
+  optional ImageInformation imageInfos = 13;
+
+  optional int32 timestamp = 6; /* timestamp in ms */
   optional Date captureDate = 7;
   optional string captureLocation = 8;
-  optional string datasetName = 9;
-  optional string team = 10;
+  optional string datasetName = 9; /* Name of Dataset */
+  optional string team = 10;    /* Name of team */
+  optional int32 playerNumber = 14; /* Number of player */
 }
