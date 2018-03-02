@@ -5,7 +5,7 @@ from protobuf.protobuf import decode_data
 
 
 def save_annotations_to_xml(file_path, file_name):
-    label_data = decode_data(os.path.join(file_path, file_name), False)
+    label_data = decode_data(os.path.join(file_path, file_name))
 
     xml_root = ET.Element("annotation")
     ET.SubElement(xml_root, "filename").text = file_name
