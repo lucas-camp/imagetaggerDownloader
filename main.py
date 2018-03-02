@@ -19,8 +19,10 @@ def main():
     parser.add_argument('-d', '--destination', type=str, help='specify the output directory (absolute path)')
     parser.add_argument('-n', '--no-label-data', dest='label_data', action='store_false',
                         default=True, help='do not write the label data in protobuf chunk')
-    parser.add_argument('-x', '--xml-label-data', dest='xml_label', action='store_false',
-                        default=True, help='defines that the annotations are saved also as *.xml files')
+    parser.add_argument('-x', '--no-xml-label-data', dest='xml_label', action='store_false',
+                        default=True, help='defines that the annotations are NOT saved also as *.xml files')
+    parser.add_argument('-c', '--csv', dest='csv_label', action='store_true',
+                        default=False, help='defines that the annotations are saved also as *.csv file')
     parser.add_argument('imageset_id', type=int, help='the id of the imageset that is downloaded')
 
     args = parser.parse_args()
@@ -28,7 +30,8 @@ def main():
     imageset_id = args.imageset_id
     destination = args.destination if args.destination else '.'
     label_data = args.label_data
-    xml_label = not args.xml_label
+    xml_label = args.xml_label
+    csv_label = args.csv_label
 
     # request handler
     requestHandler = RequestHandler()
@@ -50,6 +53,9 @@ def main():
     except (ImageSetNotFoundError, ImageSetPermissionError) as e:
         print(e)
         sys.exit()
+
+    if csv_label:
+        csv_file = open('{}/annotations.csv'.format(destination), 'w')
 
     for i, link in enumerate(sorted(image_links)):
         # some debug messages
@@ -92,6 +98,12 @@ def main():
                     else:
                         raise NotImplementedError
 
+                    if csv_label:
+                        if bounding_box is None:
+                            csv_file.write('{}|{}|not in image\n'.format(name, type))
+                        else:
+                            csv_file.write('{}|{}|{}|{}|{}|{}\n'.format(name, type, bounding_box['x1'], bounding_box['y1'], bounding_box['x2'], bounding_box['y2']))
+
                     # per convention, if the type does not exist in the image
                     # all coordinates are set to -1
                     if bounding_box is None:
@@ -112,8 +124,11 @@ def main():
             write_label_chunk(file_path, image_data, encoded_protobuf)
 
             # write xml annotations
-            if xml_label:
+            if not xml_label:
                 save_annotations_to_xml(destination, name)
+
+    if csv_label:
+        csv_file.close()
 
 
 if __name__ == '__main__':
