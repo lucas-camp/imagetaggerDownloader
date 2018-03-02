@@ -19,8 +19,8 @@ def main():
     parser.add_argument('-d', '--destination', type=str, help='specify the output directory (absolute path)')
     parser.add_argument('-n', '--no-label-data', dest='label_data', action='store_false',
                         default=True, help='do not write the label data in protobuf chunk')
-    parser.add_argument('-x', '--no-xml-label-data', dest='xml_label', action='store_false',
-                        default=True, help='defines that the annotations are NOT saved also as *.xml files')
+    parser.add_argument('-x', '--xml-label-data', dest='xml_label', action='store_false',
+                        default=True, help='defines that the annotations are saved also as *.xml files')
     parser.add_argument('imageset_id', type=int, help='the id of the imageset that is downloaded')
 
     args = parser.parse_args()
@@ -28,7 +28,7 @@ def main():
     imageset_id = args.imageset_id
     destination = args.destination if args.destination else '.'
     label_data = args.label_data
-    xml_label = args.xml_label
+    xml_label = not args.xml_label
 
     # request handler
     requestHandler = RequestHandler()
@@ -112,7 +112,7 @@ def main():
             write_label_chunk(file_path, image_data, encoded_protobuf)
 
             # write xml annotations
-            if not xml_label:
+            if xml_label:
                 save_annotations_to_xml(destination, name)
 
 
