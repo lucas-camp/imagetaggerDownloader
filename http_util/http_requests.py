@@ -1,9 +1,11 @@
 import json
-import requests
-
 from io import BytesIO
 
-from constants import BASE_URL, IMAGE_LIST_BASE_URL, LOAD_ANNOTATION_URL, LOGIN_URL
+import requests
+from lxml import html
+
+from constants import IMAGE_LINK_URL, IMAGE_LIST_URL, IMAGE_SET_URL, LOAD_ANNOTATION_URL, LOGIN_URL, \
+    IMAGE_SET_NAME_XPATH, IMAGE_SET_TEAM_XPATH, IMAGE_SET_LOCATION_XPATH, IMAGE_SET_DESCRIPTION_XPATH
 
 
 class RequestHandler:
@@ -35,8 +37,8 @@ class RequestHandler:
 
         return response
 
-    def get_image_links(self, imageset_id):
-        url = IMAGE_LIST_BASE_URL + str(imageset_id)
+    def get_dataset_infos(self, imageset_id):
+        url = IMAGE_SET_URL.format(imageset_id=imageset_id)
         response = self._get(url)
 
         if response.status_code == 404:
@@ -46,9 +48,29 @@ class RequestHandler:
             raise ImageSetPermissionError('You do not have permission to download the imageset with id {}.'
                                          .format(imageset_id))
 
-        links = [BASE_URL + link[:-1] for link in response.text.split()]
+        tree = html.fromstring(response.content)
 
-        return links
+        name = tree.xpath(IMAGE_SET_NAME_XPATH)[0].text
+        team = tree.xpath(IMAGE_SET_TEAM_XPATH)[0].text
+        location = tree.xpath(IMAGE_SET_LOCATION_XPATH)[0].text
+        description = tree.xpath(IMAGE_SET_DESCRIPTION_XPATH)[0].text
+
+        return {'name': name, 'team': team, 'location': location, 'description': description}
+
+    def get_image_links(self, imageset_id):
+        url = IMAGE_LIST_URL.format(imageset_id=imageset_id)
+        response = self._get(url)
+
+        if response.status_code == 404:
+            raise ImageSetNotFoundError('The imageset with id {} does not exist on the server.'.format(imageset_id))
+
+        if response.status_code == 403:
+            raise ImageSetPermissionError('You do not have permission to download the imageset with id {}.'
+                                         .format(imageset_id))
+
+        links = [IMAGE_LINK_URL.format(image_link=link.strip()) for link in response.text.split(',') if link.strip()]
+
+        return sorted(links)
 
     def get_annotations(self, image_id):
         params = {'image_id': image_id}

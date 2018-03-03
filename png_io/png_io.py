@@ -2,6 +2,7 @@ import png
 
 
 def read_label_chunk(image_path):
+    image_path.seek(0)
     p = png.Reader(image_path)
     for chunk_name, chunk_data in p.chunks():
         if chunk_name == 'laBl':

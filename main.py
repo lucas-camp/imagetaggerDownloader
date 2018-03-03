@@ -1,37 +1,45 @@
 import argparse
-import getpass
 import os
 import sys
+import getpass
 
-import shutil
 
-from export_formats.xml import save_annotations_to_xml
+from exporters.csv_exporter import CSVExporter
+from exporters.png_exporter import PNGExporter
+from exporters.protobuf_exporter import ProtobufExporter
+from exporters.xml_tensorflow_exporter import XMLTensorFlowExporter
 from http_util.http_requests import RequestHandler, ImageSetNotFoundError, ImageSetPermissionError
 from utils import parse_image_id_from_url, parse_filename_from_url
-from png_io.png_io import write_label_chunk
-from protobuf.protobuf import decode_data, encode_data
 
 
 def main():
     # parse arguments
     parser = argparse.ArgumentParser(prog='imagesetDownloader',
                                      description='Download an immageset and write label data in protobuf chunk')
+
     parser.add_argument('-d', '--destination', type=str, help='specify the output directory (absolute path)')
-    parser.add_argument('-n', '--no-label-data', dest='label_data', action='store_false',
-                        default=True, help='do not write the label data in protobuf chunk')
-    parser.add_argument('-x', '--no-xml-label-data', dest='xml_label', action='store_false',
-                        default=True, help='defines that the annotations are NOT saved also as *.xml files')
-    parser.add_argument('-c', '--csv', dest='csv_label', action='store_true',
-                        default=False, help='defines that the annotations are saved also as *.csv file')
+    parser.add_argument('-p', '--protobuf-label-data', dest='protobuf_labels', action='store_true', default=False,
+                        help='Save annotations in label chunk of the png file.')
+    parser.add_argument('-x', '--xml-tensorflow-label-data', dest='xml_tensorflow_labels', action='store_true',
+                        default=True, help='Save annotations in XML files')
+    parser.add_argument('-c', '--csv-label-data', dest='csv_labels', action='store_true', default=False,
+                        help='Save annotations in CSV files.')
+    parser.add_argument('-n', '--no-images', dest='no_images', action='store_true', default=False,
+                        help='Do not download the images.')
     parser.add_argument('imageset_id', type=int, help='the id of the imageset that is downloaded')
 
     args = parser.parse_args()
 
     imageset_id = args.imageset_id
     destination = args.destination if args.destination else '.'
-    label_data = args.label_data
-    xml_label = args.xml_label
-    csv_label = args.csv_label
+    protobuf_labels = args.protobuf_labels
+    xml_tensorflow_labels = args.xml_tensorflow_labels
+    csv_labels = args.csv_labels
+    no_images = args.no_images
+
+    if protobuf_labels and no_images:
+        print("Invalid options, -n nad -p are not compatible")
+        sys.exit()
 
     # request handler
     requestHandler = RequestHandler()
@@ -42,93 +50,67 @@ def main():
 
     # try to log in
     if not (requestHandler.login(username, password)):
-       print("Invalid username or password. Could not login.")
-       sys.exit()
+        print("Invalid username or password. Could not login.")
+        sys.exit()
 
-    requestHandler.login(username, password)
-
-    # try to get the image links from imageset with id imageset_id
+    # try to get the infos and image links from imageset with id imageset_id
     try:
+        imageset_infos = requestHandler.get_dataset_infos(imageset_id)
         image_links = requestHandler.get_image_links(imageset_id)
     except (ImageSetNotFoundError, ImageSetPermissionError) as e:
         print(e)
         sys.exit()
 
-    if csv_label:
-        csv_file = open('{}/annotations.csv'.format(destination), 'w')
+    exporters = []
 
-    for i, link in enumerate(sorted(image_links)):
+    if not protobuf_labels and not no_images:
+        png_exporter = PNGExporter(imageset_id, imageset_infos, destination)
+        png_exporter.setup()
+        exporters.append(png_exporter)
+    if csv_labels:
+        csv_exporter = CSVExporter(imageset_id, imageset_infos, destination)
+        csv_exporter.setup(csvfile_path=destination+'/annotations.csv')
+        exporters.append(csv_exporter)
+    if protobuf_labels:
+        protobuf_exporter = ProtobufExporter(imageset_id, imageset_infos, destination)
+        protobuf_exporter.setup()
+        exporters.append(protobuf_exporter)
+    if xml_tensorflow_labels:
+        xml_tensorflow_exporter = XMLTensorFlowExporter(imageset_id, imageset_infos, destination)
+        xml_tensorflow_exporter.setup()
+        exporters.append(xml_tensorflow_exporter)
+
+    # if csv_labels:
+    #     csv_file = open('{}/annotations.csv'.format(destination), 'w')
+
+    for i, image_link in enumerate(image_links):
         # some debug messages
-        print('Downloading image {} of {}'.format(i+1, len(image_links)))
+        print('Downloading image {} of {} in image set {}'.format(i+1, len(image_links), imageset_infos['name']))
 
         # get the id of the image
-        id = parse_image_id_from_url(link)
+        image_id = parse_image_id_from_url(image_link)
 
-        # ugly
-        name = parse_filename_from_url(link)
+        # get the name of the image
+        image_name = parse_filename_from_url(image_link)
 
         # concatenate file path
-        file_path = os.path.join(destination, name)
+        file_path = os.path.join(destination, image_name)
 
         # download image in file like object
-        image_data = requestHandler.download_image(link)
-
-        # do not write the labels data in protobuf chunk
-        if not label_data:
-            with open(file_path, 'wb') as f:
-                shutil.copyfileobj(image_data, f)
-
-        # write the labels in protobuf chunk
+        if not no_images or xml_tensorflow_labels:
+            image_data = requestHandler.download_image(image_link)
         else:
-            # decode protobuf
-            protobuf = decode_data(image_data)
+            image_data = None
 
-            # get annotations
-            annotations = requestHandler.get_annotations(id)
+        # get annotations
+        annotations = requestHandler.get_annotations(image_id)
 
-            # add annotations if there are any
-            if annotations:
-                for type, bounding_box in annotations:
-                    if type == 'ball':
-                        type_ = protobuf.balls.add()
-                    elif type == 'robot':
-                        type_ = protobuf.robots.add()
-                    elif type == 'obstacle':
-                        continue
-                    else:
-                        raise NotImplementedError
+        # call all exporters
+        for exporter in exporters:
+            exporter.handle_annotation(image_data, image_name, annotations, file_path=file_path)
 
-                    if csv_label:
-                        if bounding_box is None:
-                            csv_file.write('{}|{}|not in image\n'.format(name, type))
-                        else:
-                            csv_file.write('{}|{}|{}|{}|{}|{}\n'.format(name, type, bounding_box['x1'], bounding_box['y1'], bounding_box['x2'], bounding_box['y2']))
-
-                    # per convention, if the type does not exist in the image
-                    # all coordinates are set to -1
-                    if bounding_box is None:
-                        type_.label.boundingBox.upperLeft.x = -1
-                        type_.label.boundingBox.upperLeft.y = -1
-                        type_.label.boundingBox.lowerRight.x = -1
-                        type_.label.boundingBox.lowerRight.y = -1
-                    else:
-                        type_.label.boundingBox.upperLeft.x = bounding_box['x1']
-                        type_.label.boundingBox.upperLeft.y = bounding_box['y1']
-                        type_.label.boundingBox.lowerRight.x = bounding_box['x2']
-                        type_.label.boundingBox.lowerRight.y = bounding_box['y2']
-
-            # encode protobuf
-            encoded_protobuf = encode_data(protobuf)
-
-            # write out the image incl protobuf
-            write_label_chunk(file_path, image_data, encoded_protobuf)
-
-            # write xml annotations
-            if not xml_label:
-                save_annotations_to_xml(destination, name)
-
-    if csv_label:
-        csv_file.close()
+    for exporter in exporters:
+        exporter.finish()
 
 
 if __name__ == '__main__':
