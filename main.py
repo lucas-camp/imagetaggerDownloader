@@ -42,21 +42,21 @@ def main():
         sys.exit()
 
     # request handler
-    requestHandler = RequestHandler()
+    request_handler = RequestHandler()
 
     # get login data
     username = input('Username: ')
     password = getpass.getpass('Password: ')
 
     # try to log in
-    if not (requestHandler.login(username, password)):
+    if not (request_handler.login(username, password)):
         print("Invalid username or password. Could not login.")
         sys.exit()
 
     # try to get the infos and image links from imageset with id imageset_id
     try:
-        imageset_infos = requestHandler.get_dataset_infos(imageset_id)
-        image_links = requestHandler.get_image_links(imageset_id)
+        imageset_infos = request_handler.get_dataset_infos(imageset_id)
+        image_links = request_handler.get_image_links(imageset_id)
     except (ImageSetNotFoundError, ImageSetPermissionError) as e:
         print(e)
         sys.exit()
@@ -98,12 +98,12 @@ def main():
 
         # download image in file like object
         if not no_images or xml_tensorflow_labels:
-            image_data = requestHandler.download_image(image_link)
+            image_data = request_handler.download_image(image_link)
         else:
             image_data = None
 
         # get annotations
-        annotations = requestHandler.get_annotations(image_id)
+        annotations = request_handler.get_annotations(image_id)
 
         # call all exporters
         for exporter in exporters:
