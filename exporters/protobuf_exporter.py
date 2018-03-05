@@ -35,8 +35,8 @@ class ProtobufExporter(Exporter):
                     entity.label.boundingBox.lowerRight.y = -1
                 else:
                     entity.label.boundingBox.upperLeft.x = bounding_box['x1']
-                    entity.label.boundingBox.upperLeft.y = bounding_box['x2']
-                    entity.label.boundingBox.lowerRight.x = bounding_box['y1']
+                    entity.label.boundingBox.upperLeft.y = bounding_box['y1']
+                    entity.label.boundingBox.lowerRight.x = bounding_box['x2']
                     entity.label.boundingBox.lowerRight.y = bounding_box['y2']
 
         encoded_protobuf = encode_data(decoded_protobuf)

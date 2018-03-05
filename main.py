@@ -3,7 +3,6 @@ import os
 import sys
 import getpass
 
-
 from exporters.csv_exporter import CSVExporter
 from exporters.png_exporter import PNGExporter
 from exporters.protobuf_exporter import ProtobufExporter
@@ -69,7 +68,7 @@ def main():
         exporters.append(png_exporter)
     if csv_labels:
         csv_exporter = CSVExporter(imageset_id, imageset_infos, destination)
-        csv_exporter.setup(csvfile_path=destination+'/annotations.csv')
+        csv_exporter.setup(csvfile_path=destination + '/annotations.csv')
         exporters.append(csv_exporter)
     if protobuf_labels:
         protobuf_exporter = ProtobufExporter(imageset_id, imageset_infos, destination)
@@ -85,7 +84,7 @@ def main():
 
     for i, image_link in enumerate(image_links):
         # some debug messages
-        print('Downloading image {} of {} in image set {}'.format(i+1, len(image_links), imageset_infos['name']))
+        print('Downloading image {} of {} in image set {}'.format(i + 1, len(image_links), imageset_infos['name']))
 
         # get the id of the image
         image_id = parse_image_id_from_url(image_link)
