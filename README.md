@@ -1,9 +1,6 @@
 # imagetaggerDownloader
 
-A commandline application to download images from imagetagger.bit-bots.de and save the labels in a special chunk inside the png files.
+This project has moved to `https://github.com/NaoDevils/DevilsImagetaggerDownloader`.
+Follow the link to see new features.
 
-Usage:
-
-```
-python main.py -d target/directory IMAGESET_NUMBER
-```
+The repository is read only.
