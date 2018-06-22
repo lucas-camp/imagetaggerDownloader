@@ -35,6 +35,12 @@ class XMLTensorFlowExporter(Exporter):
         etree.SubElement(size, "depth").text = "3"
 
         if annotations:
+            ball_count = len([1 for (type, bounding_box) in annotations if bounding_box is not None and type == 'ball'])
+            robot_count = len([1 for (type, bounding_box) in annotations if bounding_box is not None and type == 'robot'])
+
+            if ball_count ++ robot_count == 0:
+                print('Skipped {}.xml, because there are {} robot and {} ball annotations.'.format(image_name[:-4], robot_count, ball_count))
+                return
             for annotation in annotations:
                 type, bounding_box = annotation
 
@@ -43,7 +49,6 @@ class XMLTensorFlowExporter(Exporter):
                     x_max = bounding_box['x2']
                     y_min = bounding_box['y1']
                     y_max = bounding_box['y2']
-
                     object = etree.SubElement(root, "object")
                     etree.SubElement(object, type)
                     bounding_box_element = etree.SubElement(object, "bndbox")
@@ -51,6 +56,5 @@ class XMLTensorFlowExporter(Exporter):
                     etree.SubElement(bounding_box_element, "xmax").text = str(x_max)
                     etree.SubElement(bounding_box_element, "ymin").text = str(y_min)
                     etree.SubElement(bounding_box_element, "ymax").text = str(y_max)
-
             tree = etree.ElementTree(root)
             tree.write('{}/{}'.format(self._xml_directory, file_path))

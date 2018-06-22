@@ -86,8 +86,8 @@ class RequestHandler:
 
         for annotation in encoded_json:
             type = annotation['annotation_type']['name']
-            content = annotation['content']
-            if content == 'Not in image':
+            content = annotation['vector']
+            if content == None:
                 bounding_box = None
             else:
                 bounding_box = content
